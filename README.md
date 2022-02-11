@@ -3,6 +3,8 @@ A CLI Premier league quiz app built using nodejs.
 
 ![image](Banner.png)  
 
+You can run the code in your browser,check it out [here](https://replit.com/@Pranjalmishra30/CLI-Quiz?embed=1&output=1)
+
 ## Running the code locally  
 Install [nodejs](https://nodejs.org/en/download/) if not installed already.    
 1. Clone the repository  
