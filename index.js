@@ -1,10 +1,10 @@
 var readlineSync = require('readline-sync');
 
-var chalk = require('chalk');
-const correct = chalk.bold.green;
-const incorrect = chalk.bold.red;
-const white = chalk.bold.white;
-const Q = chalk.bold.yellow;
+// var chalk = require('chalk');
+// const correct = chalk.bold.green;
+// const incorrect = chalk.bold.red;
+// const white = chalk.bold.white;
+// const Q = chalk.bold.yellow;
 
 var figlet = require('figlet');
 var score=0
@@ -34,21 +34,21 @@ function intro(){
 }
 
 function QuesRun(question,answer){
-    var ans = readlineSync.question(Q(question));
+    var ans = readlineSync.question(question);
     if(ans.toLowerCase()==answer){
-        console.log(correct("Correct !"));
+        console.log("Correct !");
         score +=1;
     }else{
-        console.log(incorrect("Incorrect :("));
+        console.log("Incorrect :(");
     }
     // console.log("Score: ",score);
 }
 
 function level1(){
 
-    console.log(white("================================"))
-    console.log(white("    Level 1     "))
-    console.log(white("================================\n"))
+    console.log("================================")
+    console.log("    Level 1     ")
+    console.log("================================\n")
 
     var Q_1 = [{
         Q: 'How many teams are in the premier league? ',
@@ -76,20 +76,20 @@ function level1(){
     }
 
     if (score>=3){
-        console.log(chalk.bold.greenBright("\nCongrats ... You have cleared level 1"));
-        console.log(chalk.bold.blue("Current score: ",score));
+        console.log("\nCongrats ... You have cleared level 1");
+        console.log("Current score: ",score);
         console.log("\n");
         return 1;
     }else{
-        console.log(chalk.bold.redBright("\nYou need to get 3 or more questions correct to progress to the next level, try level 1 again (Ctrl+C to exit)\n"));
+        console.log("\nYou need to get 3 or more questions correct to progress to the next level, try level 1 again (Ctrl+C to exit)\n");
         level1()
     }
 }
 
 function level2(){
-    console.log(white("================================"))
-    console.log(white("    Level 2     "));
-    console.log(white("================================"))
+    console.log("================================")
+    console.log("    Level 2     ");
+    console.log("================================")
     var Q_2 = [{
         Q: 'How many teams get relegated in each season of the PL? ',
         A: '3'},{
@@ -110,7 +110,7 @@ function level2(){
 function main(){
     level1();
     level2();
-    console.log(chalk.bold.blue("\nFinal Score: "+score));
+    console.log("\nFinal Score: "+score);
 }
 
 asciiText("CLI Premier League Quiz")
