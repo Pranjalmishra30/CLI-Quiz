@@ -1,43 +1,56 @@
 var readlineSync = require('readline-sync');
+
+var chalk = require('chalk');
+const correct = chalk.bold.green;
+const incorrect = chalk.bold.red;
+const white = chalk.bold.white;
+const Q = chalk.bold.yellow;
+
+var figlet = require('figlet');
 var score=0
 
-function intro(){
-    console.log("================================")
-    console.log("    CLI Premier League Quiz     ");
-    console.log("================================")
-    console.log("\n");
-    console.log("WELCOME to CLI-Quiz !!!");
-    var profile = readlineSync.question("Hello, what is your name and what football club do you support? ");
+function asciiText(text){
+    figlet.text(text, function(err, data) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(data);
+    });
+}
+
+function intro(){    
+    var profile = readlineSync.question(Q("Welcome, what is your name and what football club do you support? "));
     player = String(profile)
     lst = player.split(" ");
     console.log("\n");
-    console.log("PLAYER PROFILE:\nName: ",lst[0]);
+    console.log(white("Player Profile\nName: ",lst[0]));
     if(lst.length >2)
-        console.log("Club: ",lst[1],lst[2]); // for club names with 2 words
+        console.log(white("Club: ",lst[1],lst[2])); // for club names with 2 words
     else
-        console.log("Club: ",lst[1]);
-    console.log("\nLet's begin with the QUIZ !!!\n");
-
+        console.log(white("Club: ",lst[1]));
+    console.log("\n");
 }
 
 function QuesRun(question,answer){
-    var ans = readlineSync.question(question);
+    var ans = readlineSync.question(Q(question));
     if(ans.toLowerCase()==answer){
-        console.log("Correct !");
+        console.log(correct("Correct !"));
         score +=1;
     }else{
-        console.log("Incorrect :(");
+        console.log(incorrect("Incorrect :("));
     }
     // console.log("Score: ",score);
 }
 
 function level1(){
 
-    console.log("================================")
-    console.log("    Level 1     ");
-    console.log("================================")
+    console.log(white("================================"))
+    console.log(white("    Level 1     "))
+    console.log(white("================================\n"))
 
-    var Q_0 = [{
+    var Q_1 = [{
         Q: 'How many teams are in the premier league? ',
         A: '20'},{
         Q: 'How many titles have Manchester united won? ',
@@ -57,25 +70,27 @@ function level1(){
     }]
 
     for(var i=0;i<5;i++){
-        var x = Math.floor(Math.random() * Q_0.length);
-        QuesRun(Q_0[x].Q,Q_0[x].A);
-        Q_0.splice(x,1);
+        var x = Math.floor(Math.random() * Q_1.length);
+        QuesRun(Q_1[x].Q,Q_1[x].A);
+        Q_1.splice(x,1);
     }
 
     if (score>=3){
-        console.log("\nCongrats ... You have cleared level 1\n");
+        console.log(chalk.bold.greenBright("\nCongrats ... You have cleared level 1"));
+        console.log(chalk.bold.blue("Current score: ",score));
+        console.log("\n");
         return 1;
     }else{
-        console.log("\nYou need to get 3 or more questions correct, try the quiz again (Ctrl+C to exit)\n");
+        console.log(chalk.bold.redBright("\nYou need to get 3 or more questions correct to progress to the next level, try level 1 again (Ctrl+C to exit)\n"));
         level1()
     }
 }
 
 function level2(){
-    console.log("================================")
-    console.log("    Level 2     ");
-    console.log("================================")
-    var Q_1 = [{
+    console.log(white("================================"))
+    console.log(white("    Level 2     "));
+    console.log(white("================================"))
+    var Q_2 = [{
         Q: 'How many teams get relegated in each season of the PL? ',
         A: '3'},{
         Q: 'Which Real madrid winger previously played for Tottenham hotspur? ',
@@ -87,16 +102,16 @@ function level2(){
         Q: 'Which team won the title in 2016 against all odds? ',
         A: 'leicester'}]
 
-    for(var i=0;i<Q_1.length;i++){
-        QuesRun(Q_1[i].Q,Q_1[i].A);
+    for(var i=0;i<Q_2.length;i++){
+        QuesRun(Q_2[i].Q,Q_2[i].A);
     }
 }
 
 function main(){
-    intro();
     level1();
     level2();
-    console.log("\nFinal Score: "+score)
+    console.log(chalk.bold.blue("\nFinal Score: "+score));
 }
 
-main();
+asciiText("CLI Premier League Quiz")
+setTimeout(() => {  main() }, 1000);
