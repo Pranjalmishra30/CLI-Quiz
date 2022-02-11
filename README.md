@@ -19,6 +19,6 @@ Install [nodejs](https://nodejs.org/en/download/) if not installed already.
 4. Implement high score feature.  
 
 ## References  
-1. Build a [CLI app]()  
-2. [readline-sync]() documentation  
-3. [chalk]() documentation
+1. Build a [CLI app](https://www.youtube.com/watch?v=_L-UszPmy2A&t=795s)  
+2. [readline-sync](https://www.npmjs.com/package/readline-sync) documentation  
+3. [chalk](https://www.npmjs.com/package/readline-sync) documentation
